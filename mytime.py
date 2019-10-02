@@ -41,7 +41,10 @@ def add_time_better(t1, t2):
 def increment_better(t, seconds):
     seconds_time = Time()
     seconds_time.second = seconds
-    return add_time_better(t, seconds_time)
+    sum = add_time_better(t, seconds_time)
+    t.hour = sum.hour
+    t.minute = sum.minute
+    t.second = sum.second
     
 def add_time(t1, t2):
     sum = add_time_simple(t1, t2)
@@ -56,7 +59,10 @@ def add_time(t1, t2):
 def increment(t, seconds):
     seconds_time = Time()
     seconds_time.second = seconds
-    return add_time(t, seconds_time)
+    sum = add_time(t, seconds_time)
+    t.hour = sum.hour
+    t.minute = sum.minute
+    t.second = sum.second
     
 def int_to_time(seconds):
     t = Time()
@@ -68,5 +74,14 @@ def time_to_int(t):
     minutes = t.hour * 60 + t.minute
     return minutes * 60 + t.second
     
-def add_time_clever(t1, t2):
+def add_time_base60(t1, t2):
+    return int_to_time(time_to_int(t1) + time_to_int(t2))
+    
+def increment_base60_pure(t1, seconds):
+    return int_to_time(time_to_int(t1) + seconds)
+
+def valid_time(t):
+    if (t.hour < 0 or t.minute < 0 or t.second < 0 or t.minute >= 60 or t.second >= 60):
+        return False
+    return True
     
