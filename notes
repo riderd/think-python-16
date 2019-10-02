@@ -1,0 +1,9 @@
+Note I started with time.py but when I did import of that I had problems due to conflict with built-in time
+different versions of add_time
+
+note in my increment() method, I did this and got a failure which was seen with a simple unit test:
+    seconds_time.seconds = seconds
+
+pure functions
+
+Can I set up some things in set up for constant time
