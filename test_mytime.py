@@ -85,10 +85,14 @@ class TestTime(unittest.TestCase):
 
     def test_increment_better(self):
         t1 = Time()
-        self.assertEqual("00:00:00", compose_time(increment_better(t1, 0)))
-        self.assertEqual("00:00:30", compose_time(increment_better(t1, 30)))
-        self.assertEqual("00:01:20", compose_time(increment_better(t1, 80)))
-        self.assertEqual("00:01:195", compose_time(increment_better(t1, 255)))
+        increment_better(t1, 0)
+        self.assertEqual("00:00:00", compose_time(t1))
+        increment_better(t1, 30)
+        self.assertEqual("00:00:30", compose_time(t1))
+        increment_better(t1, 50)
+        self.assertEqual("00:01:20", compose_time(t1))
+        increment_better(t1, 175)
+        self.assertEqual("00:02:135", compose_time(t1))
         
     def test_add_time(self):
         t1 = Time()
@@ -119,16 +123,21 @@ class TestTime(unittest.TestCase):
         
     def test_increment(self):
         t1 = Time()
-        self.assertEqual("00:00:00", compose_time(increment(t1, 0)))
-        self.assertEqual("00:00:30", compose_time(increment(t1, 30)))
-        self.assertEqual("00:01:20", compose_time(increment(t1, 80)))
-        self.assertEqual("00:04:15", compose_time(increment(t1, 255))) 
+        increment(t1, 0)
+        self.assertEqual("00:00:00", compose_time(t1))
+        increment(t1, 30)
+        self.assertEqual("00:00:30", compose_time(t1))
+        increment(t1, 50)
+        self.assertEqual("00:01:20", compose_time(t1))
+        increment(t1, 175)
+        self.assertEqual("00:04:15", compose_time(t1))
        
         t2 = Time()
         t2.hour = 11
         t2.minute = 59
         t2.second = 30
-        self.assertEqual("12:04:20", compose_time(increment(t2, 290)))
+        increment(t2, 290)
+        self.assertEqual("12:04:20", compose_time(t2))
     
     def test_int_to_time(self):
         self.assertEqual("00:00:00", compose_time(int_to_time(0)))
@@ -145,7 +154,87 @@ class TestTime(unittest.TestCase):
         t2.minute = 59
         t2.second = 30
         self.assertEqual((11 * 3600) + (59 * 60) + 30, time_to_int(t2))
+      
+    def test_add_time_base60(self):
+        t1 = Time()
+        self.assertEqual("00:00:00", compose_time(add_time_base60(t1, t1)))
+
+        t2 = Time()
+        t2.hour = 11
+        t2.minute = 59
+        t2.second = 30
+        self.assertEqual("23:59:00", compose_time(add_time_base60(t2, t2)))
         
+        # test example from the book
+        start = Time()
+        start.hour = 9
+        start.minute = 45
+        start.second = 0
+        duration = Time()
+        duration.hour = 1
+        duration.minute = 35
+        duration.second = 0
+        self.assertEqual("11:20:00", compose_time(add_time_base60(start, duration)))   
+        
+        t3 = Time()
+        t3.hour = 23
+        t3.minute = 30
+        t3.second = 270
+        self.assertEqual("47:09:00", compose_time(add_time_base60(t3, t3)))
+        
+    def test_increment_base60_pure(self):
+        t1 = Time()
+        self.assertEqual("00:00:00", compose_time(increment_base60_pure(t1, 0)))
+        self.assertEqual("00:00:30", compose_time(increment_base60_pure(t1, 30)))
+        self.assertEqual("00:01:20", compose_time(increment_base60_pure(t1, 80)))
+        self.assertEqual("00:04:15", compose_time(increment_base60_pure(t1, 255)))
+       
+        t2 = Time()
+        t2.hour = 11
+        t2.minute = 59
+        t2.second = 30
+        self.assertEqual("12:04:20", compose_time(increment_base60_pure(t2, 290)))
+        
+    def test_valid_time(self):
+        t1 = Time()
+        self.assertTrue(valid_time(t1))
+        
+        t2 = Time()
+        t2.hour = 11
+        t2.minute = 59
+        t2.second = 30
+        self.assertTrue(valid_time(t2))
+        
+        t2.minute = 60
+        self.assertFalse(valid_time(t2))
+        t2.minute = 61
+        self.assertFalse(valid_time(t2))
+        
+        t2.minute = 59
+        t2.second = 59
+        self.assertTrue(valid_time(t2))
+         
+        t2.second = 60
+        self.assertFalse(valid_time(t2))
+        t2.second = 61
+        self.assertFalse(valid_time(t2))
+        
+        t2.second = -1
+        self.assertFalse(valid_time(t2))
+        t2.second = 0
+        self.assertTrue(valid_time(t2))
+        
+        t2.minute = -1
+        self.assertFalse(valid_time(t2))
+        t2.minute = -2
+        self.assertFalse(valid_time(t2))
+        
+        t2 = Time()
+        self.assertTrue(valid_time(t2))
+        t2.hour = -1
+        self.assertFalse(valid_time(t2))
+        
+                  
 if __name__ == '__main__':
     unittest.main()
     
