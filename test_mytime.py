@@ -146,6 +146,7 @@ class TestTime(unittest.TestCase):
         t2.second = 30
         self.assertEqual((11 * 3600) + (59 * 60) + 30, time_to_int(t2))
         
+        
 if __name__ == '__main__':
     unittest.main()
     
