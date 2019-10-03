@@ -7,3 +7,17 @@ note in my increment() method, I did this and got a failure which was seen with 
 pure functions
 
 Can I set up some things in set up for constant time
+
+prototyping vs planning & refactoring
+
+mess with PYTHONPATH if you want to move test scripts into a test directory
+
+What are the things to assert (Equal, NotEqual, ...)?
+
+Write an assertion raised error
+
+Deal with this comment:
+        # way is to probably make another method that gets the day of the week from a date
+        # and that can be tested well with different dates and then the current_day() method
+        # is really simple and could be tested 
+Write a unit test during class for this
