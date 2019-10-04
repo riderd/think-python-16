@@ -5,7 +5,7 @@ class TestTime(unittest.TestCase):
     
     def setUp(self):
         self.t = Time()
-        // should probably set up t2 as well
+        # should probably set up t2 as well
         
     def tearDown(self):
         del self.t
