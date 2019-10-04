@@ -32,7 +32,7 @@ Unit Testing
 		- based on JUnit framework
 		- test case 
 		- use assertEqual, assertTrue, assertFalse, assertIsNot, assertRaises, ...
-	- helps alleviate some downsides or prototyping
+	- helps alleviate some downsides of prototyping
 	- in my increment method, I wrote "seconds_time.seconds = seconds" and got a failure from the unit test
 	- setUp() called before each test (note self.t vs. t)
 	- tearDown() called after each test
@@ -47,3 +47,4 @@ Exercise 2
 Exercise 3
 
 Exercise 4
+	- I didn't do this one and neither did authork
