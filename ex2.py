@@ -41,7 +41,7 @@ def days_hours_minutes_seconds_till_next_birthday(birthday, dt):
     dt_year_birthday = datetime(dt.year, birthday.month, birthday.day)
     # should I be returning a (0, 0, 0, 0) if it's the same day?
     if (dt_year_birthday > dt):
-        return delta_to_days_hours_minutes_seconds(dt - dt_year_birthday)
+        return delta_to_days_hours_minutes_seconds(dt_year_birthday - dt)
     dt_next_year_birthday = datetime(dt_year_birthday.year + 1, dt_year_birthday.month, dt_year_birthday.day)
     return delta_to_days_hours_minutes_seconds(dt_next_year_birthday - dt)
     

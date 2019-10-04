@@ -58,6 +58,11 @@ class TestEx1(unittest.TestCase):
         dt = datetime(2020, 6, 15, hour = 15, minute = 29, second = 30) 
         self.assertEqual((364, 8, 30, 30), days_hours_minutes_seconds_till_next_birthday(birthday, dt))
         
+        # here's a test that come up during the presentation that was wrong
+        birthday = date(1992, 10, 10)
+        dt = datetime(2019, 10, 4, hour = 14, minute = 58, second = 30)
+        print(days_hours_minutes_seconds_till_next_birthday(birthday, dt))
+
 if __name__ == '__main__':
     unittest.main()
         
