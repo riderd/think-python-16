@@ -1,23 +1,49 @@
-Note I started with time.py but when I did import of that I had problems due to conflict with built-in time
-different versions of add_time
+Code in GitHub - https://github.com/riderd/think-python-16
+	- % git clone https://github.com/riderd/think-python-16.git
 
-note in my increment() method, I did this and got a failure which was seen with a simple unit test:
-    seconds_time.seconds = seconds
+Time class
+	- put in time.py originally but my import interfered with built-in
+	
+Pure Functions
+	- does not modify any arguments to the function
+	- has no "side effects" - https://en.wikipedia.org/wiki/Side_effect_(computer_science)
+	- just returns a value
+	- all versions of add time(time1, time2) are pure
+	- increment_pure_base60(time, seconds) is a pure function
+	- functional programming style uses pure functions - https://en.wikipedia.org/wiki/Functional_programming
+	
+Modifier Functions
+	- increment(time, seconds) is a modifier
+	
+Prototyping 
+	- prototype and patch (aka code and fix)
+	
+Planning
+	- designed development (planning)
+		- Time object is a three digit number in base 60 
+		- use integer arithmetic when everything converted to seconds
+			- make multiplication and subtraction much easier
+		- note different methods using base60
 
-pure functions
+Unit Testing
+	- enables 'refactoring' - https://en.wikipedia.org/wiki/Code_refactoring
+		- helps with code maintainability
+	- python unittest - https://docs.python.org/3/library/unittest.html
+		- based on JUnit framework
+		- test case 
+		- use assertEqual, assertTrue, assertFalse, assertIsNot, assertRaises, ...
+	- helps alleviate some downsides or prototyping
+	- in my increment method, I wrote "seconds_time.seconds = seconds" and got a failure from the unit test
+	- setUp() called before each test (note self.t vs. t)
+	- tearDown() called after each test
+	- run with python3 -m unittest test_mytime.py (add -v for verbose)
+		- see how test_time changes t but only for that instance of test
 
-Can I set up some things in set up for constant time
+Exercise 1
+	
+Exercise 2
+	- write unit test for day_from_date(d)
 
-prototyping vs planning & refactoring
+Exercise 3
 
-mess with PYTHONPATH if you want to move test scripts into a test directory
-
-What are the things to assert (Equal, NotEqual, ...)?
-
-Write an assertion raised error
-
-Deal with this comment:
-        # way is to probably make another method that gets the day of the week from a date
-        # and that can be tested well with different dates and then the current_day() method
-        # is really simple and could be tested 
-Write a unit test during class for this
+Exercise 4

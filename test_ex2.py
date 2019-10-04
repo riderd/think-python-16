@@ -4,12 +4,12 @@ from datetime import date, timedelta
 
 class TestEx1(unittest.TestCase):
     def test_current_day(self):
-        # Note this test will fail if it's not Thursday. I haven't come up with a good way
+        # Note this test will fail if it's not Friday. I haven't come up with a good way
         # to test this. Maybe there's another way to calculate the day of the week.
         # Best way is to probably make another method that gets the day of the week from a date
         # and that can be tested well with different dates and then the current_day() method
         # is really simple and could be tested 
-        self.assertEqual("Thursday", current_day())
+        self.assertEqual("Friday", current_day())
 
     def test_age_asof_date(self):
         # June 15, 2000

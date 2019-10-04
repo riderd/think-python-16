@@ -3,18 +3,25 @@ from mytime import *
 
 class TestTime(unittest.TestCase):
     
-    def test_time(self):
-        t = Time()
-        self.assertEqual(0, t.hour)
-        self.assertEqual(0, t.minute)
-        self.assertEqual(0, t.second)
+    def setUp(self):
+        self.t = Time()
+        // should probably set up t2 as well
         
-        t.hour = 11
-        t.minute = 59
-        t.second = 30
-        self.assertEqual(11, t.hour)
-        self.assertEqual(59, t.minute)
-        self.assertEqual(30, t.second)
+    def tearDown(self):
+        del self.t
+        # print("in tearDown")
+        
+    def test_time(self):
+        self.assertEqual(0, self.t.hour)
+        self.assertEqual(0, self.t.minute)
+        self.assertEqual(0, self.t.second)
+        
+        self.t.hour = 11
+        self.t.minute = 59
+        self.t.second = 30
+        self.assertEqual(11, self.t.hour)
+        self.assertEqual(59, self.t.minute)
+        self.assertEqual(30, self.t.second)
         
     def test_compose_time(self):
         t = Time()
@@ -146,8 +153,7 @@ class TestTime(unittest.TestCase):
         self.assertEqual("00:04:15", compose_time(int_to_time(255))) 
         
     def test_time_to_int(self):
-        t1 = Time()
-        self.assertEqual(0, time_to_int(t1))
+        self.assertEqual(0, time_to_int(self.t))
         
         t2 = Time()
         t2.hour = 11
